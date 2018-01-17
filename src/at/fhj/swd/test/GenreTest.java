@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @org.junit.FixMethodOrder( org.junit.runners.MethodSorters.NAME_ASCENDING)
 public class GenreTest {
@@ -47,15 +48,15 @@ public class GenreTest {
     }
 
     @Test
-    public void remove(){
+    public void remove () {
         Genre thriller = genreRepository.find(id);
-        assertNotNull(thriller);
-        Transaction.begin();
+        assertNotNull (thriller);
+        Transaction.begin ();
 
-        genreRepository.remove(thriller);
+        genreRepository.remove( thriller );
         Transaction.commit();
         thriller = genreRepository.find(id);
-        assertNotNull(thriller);
+        assertNull (thriller);
     }
 
     @AfterClass

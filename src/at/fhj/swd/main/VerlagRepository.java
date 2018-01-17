@@ -13,7 +13,7 @@ public class VerlagRepository extends Repository<Verlag> implements IRepository<
     private final static String table = "verlag";
     private final static String sequence = "verlag_id_seq";
 
-    public VerlagRepository(Class<Verlag> entityClass) {
+    public VerlagRepository() {
         super(Verlag.class);
     }
 
@@ -30,6 +30,6 @@ public class VerlagRepository extends Repository<Verlag> implements IRepository<
         Verlag verlAut = new Verlag(id, name, ort, strasse, plz);
         entityManager.persist(verlAut);
         return verlAut;
+    }
 }
-
 
