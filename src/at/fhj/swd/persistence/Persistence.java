@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 public class Persistence extends at.fhj.swd.util.Persistence
 {
 
-    public static final String persistenceUnit = "BuchverzeichnisDb";
+    public static final String persistenceUnit = "db_lanner16";
 
 
     public static EntityManager connect () {

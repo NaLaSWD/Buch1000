@@ -62,7 +62,7 @@ public class Buch {
         this.jahr = jahr;
     }
 
-    /*@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -77,5 +77,5 @@ public class Buch {
     public int hashCode() {
 
         return Objects.hash(id, isbn, titel, jahr);
-    }*/
+    }
 }

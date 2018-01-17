@@ -26,8 +26,7 @@ public class Persistence
         return em;
     }
 
-    public static EntityManager connect (String persistenceUnit
-                                        ,String user, String password)
+    public static EntityManager connect (String persistenceUnit ,String user, String password)
     {
         if (emf == null)
         {

@@ -2,9 +2,9 @@
        ID SERIAL NOT NULL,
        VORNAME varchar(255),
        NACHNAME varchar(255),
-       GEB_DATUM date,
-       FK_EINZELBUERO INT NOT NULL,
-       FK_VERLAG INT NOT NULL,
+       GEB_DATUM VARCHAR(255),
+       FK_EINZELBUERO int4,
+       FK_VERLAG int4 ,
        PRIMARY KEY (ID));
 
   CREATE TABLE VERLAG (

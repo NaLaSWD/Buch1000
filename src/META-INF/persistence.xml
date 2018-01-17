@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
-    <persistence-unit name="BuchverzeichnisDb">
+    <persistence-unit name="db_lanner16" transaction-type="RESOURCE_LOCAL">
         <class>at.fhj.swd.main.Buch</class>
+        <class>at.fhj.swd.main.Autor</class>
+        <class>at.fhj.swd.main.Verlag</class>
+        <class>at.fhj.swd.main.Einzelbuero</class>
+        <class>at.fhj.swd.main.Genre</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/BuchverzeichnisDb"/>
-            <property name="javax.persistence.jdbc.user" value="postgres"/>
-            <property name="javax.persistence.jdbc.password" value="Silvesta1"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://10.65.1.37:5433/db_lanner16"/>
+            <property name="javax.persistence.jdbc.user" value="lanner16"/>
+            <property name="javax.persistence.jdbc.password" value="lanner16"/>
         </properties>
     </persistence-unit>
 

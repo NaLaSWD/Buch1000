@@ -1,23 +1,19 @@
 package at.fhj.swd.test;
 
+import at.fhj.swd.main.Buch;
 import at.fhj.swd.main.BuchRepository;
 import at.fhj.swd.util.Transaction;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/*import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;*/
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 
 @org.junit.FixMethodOrder( org.junit.runners.MethodSorters.NAME_ASCENDING)
 public class BuchTest {
-
-        /*static EntityManagerFactory factory;
-        static EntityManager manager;
-        static EntityTransaction transaction;*/
-        static final String persistenceUnitName = "BuchverzeichnisDb";
 
         static BuchRepository buchRepository;
         static final int id = 158;
@@ -30,14 +26,9 @@ public class BuchTest {
         public static void setup() {
 
             buchRepository = new BuchRepository();
-            /*factory = Persistence.createEntityManagerFactory(persistenceUnitName);
-            assertNotNull(factory);
-
-            manager = factory.createEntityManager();
-            assertNotNull(manager);
-
-            transaction = manager.getTransaction();
-            assertNotNull(transaction);*/
+            Transaction.begin();
+            buchRepository.reset();
+            Transaction.commit();
         }
 
 
@@ -46,57 +37,33 @@ public class BuchTest {
             Transaction.begin();
             buchRepository.create(id, isbn, jahr, titel);
             Transaction.commit();
-            /*transaction.begin ();
-            Buch buch = new Buch (id, isbn, jahr, titel);
-            System.out.println("test: " + buch);
-
-            assertNotNull (buch);
-            manager.persist(buch);
-            transaction.commit();*/
         }
 
-   /*  @Test
-    public void testCreateBuch(){
-        BuchEntity buch1 = new BuchEntity();
-        buch1.setIsbn(5656);
-        buch1.setJahr(2018);
-        buch1.setTitel("HalloBuch");
-
-     Dataaccess.getInstance().getManager().getTransaction().begin();
-        Dataaccess.getInstance().getManager().persist(buch1);
-        Dataaccess.getInstance().getManager().getTransaction().commit();
-        transaction.begin();
-        manager.persist(buch1);
-        transaction.commit();
-    }*/
-
-       /* @Test
+        @Test
         public void modify () {
-            Buch buch = manager.find (Buch.class, id);
+            Buch buch = buchRepository.find(id);
             assertNotNull (buch);
-            transaction.begin ();
+            Transaction.begin ();
 
             buch.setIsbn(isbnUpdate);
-            transaction.commit();
-            teardown();
-            setup();
+            Transaction.commit();
 
-            buch = manager.find(Buch.class, id);
-            assertEquals(isbn + isbnUpdate, (int) buch.getIsbn());
+            buch = buchRepository.find(id);
+            assertEquals(isbnUpdate, (int) buch.getIsbn());
         }
 
         @Test
         public void remove () {
-            Buch buch = manager.find (Buch.class, id);
+            Buch buch = buchRepository.find(id);
             assertNotNull (buch);
-            transaction.begin ();
-            manager.remove ( buch );
-            transaction.commit();
-            buch = manager.find(Buch.class, id);
+            Transaction.begin ();
+
+            buchRepository.remove( buch );
+            Transaction.commit();
+            buch = buchRepository.find(id);
             assertNull (buch);
         }
 
-*/
         @AfterClass
         public static void teardown() {
             Transaction.begin();

@@ -36,6 +36,11 @@ public abstract class Repository<T> {
     }
 
 
+    public void remove(Object obj) {
+        entityManager.remove(obj);
+    }
+
+
     public void printAll () {
         List<T> entities = findAll();
 
