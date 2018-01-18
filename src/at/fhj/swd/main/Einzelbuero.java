@@ -13,7 +13,7 @@ public class Einzelbuero {
     private String ort;
     private String strasse;
     private int plz;
-
+    ^
     @OneToOne
     private Autor autor;
 

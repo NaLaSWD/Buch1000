@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+@Entity(name="Genre")
+@NamedQueries({
+        @NamedQuery(name="Genre.findById", query="SELECT g FROM Genre g WHERE g.id = :id"),
+        @NamedQuery(name="Genre.findByBuch", query="SELECT g FROM Genre g JOIN  Buch b WHERE b.titel = :titel"),
+})
+
 @Entity
 @Table(name = "genre")
 public class Genre {
