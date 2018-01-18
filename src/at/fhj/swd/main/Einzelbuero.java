@@ -14,6 +14,9 @@ public class Einzelbuero {
     private String strasse;
     private int plz;
 
+    @OneToOne
+    private Autor autor;
+
     public Einzelbuero(int id, String ort, String strasse, int plz) {
         setId(id);
         setOrt(ort);

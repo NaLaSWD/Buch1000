@@ -1,6 +1,8 @@
 package at.fhj.swd.main;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +14,9 @@ public class Verlag {
     private String ort;
     private String strasse;
     private int plz;
+
+    @OneToMany (mappedBy = "verlag" )
+    private Collection<Autor> autor = new ArrayList<Autor>();
 
     public Verlag(int id, String name, String ort, String strasse, int plz) {
         this.id = id;
@@ -72,6 +77,15 @@ public class Verlag {
 
     public void setPlz(int plz) {
         this.plz = plz;
+    }
+
+    //OneToMany Getter&Setter
+    public Collection<Autor> getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Collection<Autor> autor) {
+        this.autor = autor;
     }
 
     @Override

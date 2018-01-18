@@ -1,12 +1,21 @@
 package at.fhj.swd.main;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table (name = "autor")
 public class Autor {
-    @Id
+
+    @ManyToMany
+    private Collection<Buch> buch = new ArrayList<>();
+
+    @ManyToOne
+    private Verlag verlag;
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String vorname;
     private String nachname;
@@ -60,6 +69,24 @@ public class Autor {
 
     public void setGebDat(String geb_datum) {
         this.geb_datum = geb_datum;
+    }
+
+    //ManyToMany Getter+Setter
+    public Collection<Buch> getBuch() {
+        return buch;
+    }
+
+    public void setBuch(Collection<Buch> buch) {
+        this.buch = buch;
+    }
+
+    //ManyToOne Getter&Setter
+    public Verlag getVerlag() {
+        return verlag;
+    }
+
+    public void setVerlag(Verlag verlag) {
+        this.verlag = verlag;
     }
 
     @Override

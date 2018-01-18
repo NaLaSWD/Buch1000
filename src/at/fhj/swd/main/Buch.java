@@ -1,6 +1,8 @@
 package at.fhj.swd.main;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +13,12 @@ public class Buch {
     private int isbn;
     private String titel;
     private int jahr;
+
+    @ManyToMany (mappedBy = "buch")
+    private Collection<Autor> autor = new ArrayList<>();
+
+    @ManyToOne
+    private Genre genre;
 
     public Buch(int id, int isbn, int jahr, String titel) {
         setId(id);
@@ -60,6 +68,25 @@ public class Buch {
 
     public void setJahr(int jahr) {
         this.jahr = jahr;
+    }
+
+    //ManyToMany Getter&Setter
+    public Collection<Autor> getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Collection<Autor> autor) {
+        this.autor = autor;
+    }
+
+
+    //ManyToOne Getter&Setter
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override

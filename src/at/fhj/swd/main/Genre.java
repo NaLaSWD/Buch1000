@@ -1,6 +1,8 @@
 package at.fhj.swd.main;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +11,9 @@ public class Genre {
     @Id
     private int id;
     private String genre;
+
+    @OneToMany (mappedBy = "genre" )
+    private Collection<Buch> events = new ArrayList<Buch>();
 
     public Genre(int id, String genre) {
         this.id = id;
