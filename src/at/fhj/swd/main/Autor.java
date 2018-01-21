@@ -21,11 +21,13 @@ public class Autor {
     private String nachname;
     private String geb_datum;
 
-    public Autor(int id, String vorname, String nachname, String geb_datum) {
+    public Autor(int id, String vorname, String nachname, String geb_datum, Verlag verlag) {
         this.id = id;
         this.vorname = vorname;
         this.nachname = nachname;
         this.geb_datum = geb_datum;
+        setVerlag(verlag);
+        buch = new ArrayList<>();
     }
 
     public Autor() {
