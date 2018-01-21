@@ -4,10 +4,14 @@ import at.fhj.swd.persistence.IRepository;
 import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name="GenreRepository.findGenreById", query="SELECT g.genre FROM Genre g WHERE g.id = :id"),
+        @NamedQuery(name="GenreRepository.findByBuch", query="SELECT g FROM Genre g JOIN  Buch b WHERE b.titel = :titel"),
+})
+
 public class GenreRepository extends Repository<Genre> implements IRepository<Genre> {
 
     @Id
@@ -33,5 +37,10 @@ public class GenreRepository extends Repository<Genre> implements IRepository<Ge
         Genre thriller = new Genre(id, genre);
         entityManager.persist(thriller);
         return thriller;
+    }
+    public String findGenreById(int id) {
+        TypedQuery<String> query = entityManager.createNamedQuery("GenreRepository.findGenreById", String.class);
+        query.setParameter ("id", id);
+        return query.getSingleResult();
     }
 }

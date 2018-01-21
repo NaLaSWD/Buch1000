@@ -4,10 +4,14 @@ import at.fhj.swd.persistence.IRepository;
 import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name="AutorRepository.findFirstnameById", query="SELECT a.vorname FROM Autor a WHERE a.id = :id"),
+        @NamedQuery(name="AutorRepository.findByVerlag", query="SELECT a FROM Autor a JOIN  Verlag v WHERE v.name = :name")
+})
+
 public class AutorRepository extends Repository<Autor> implements IRepository<Autor> {
 
     @Id
@@ -34,5 +38,11 @@ public class AutorRepository extends Repository<Autor> implements IRepository<Au
         Autor autor1 = new Autor(id, vorname, nachname, geb_datum);
         entityManager.persist(autor1);
         return autor1;
+    }
+
+    public String findFirstnameById(int id) {
+        TypedQuery<String> query = entityManager.createNamedQuery("AutorRepository.findFirstnameById", String.class);
+        query.setParameter ("id", id);
+        return query.getSingleResult();
     }
 }

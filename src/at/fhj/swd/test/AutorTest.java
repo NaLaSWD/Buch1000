@@ -15,7 +15,7 @@ public class AutorTest {
 
     static AutorRepository autorRepository;
     static final int id = 567;
-    static final String vornname = "Max";
+    static final String vorname = "Max";
     static final String nachname = "Mayer";
     static final String geb_datum = "14.02.1966";
     static final String vornameUpdate = "Martin";
@@ -32,8 +32,13 @@ public class AutorTest {
     @Test
     public void create () {
         Transaction.begin();
-        autorRepository.create(id, vornname, nachname, geb_datum);
-            Transaction.commit();
+        autorRepository.create(id, vorname, nachname, geb_datum);
+        Transaction.commit();
+    }
+
+    @Test public void getFindFirstnameByIdQuery () {
+        String result = autorRepository.findFirstnameById(id);
+        assertEquals(vorname, result);
     }
 
     @Test

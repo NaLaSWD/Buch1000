@@ -5,13 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-@Entity(name="Buch")
-@NamedQueries({
-        @NamedQuery(name="Buch.findByTitel", query="SELECT b FROM Buch b WHERE b.titel = :titel"),
-        @NamedQuery(name="Buch.findByGenre", query="SELECT b FROM Buch b WHERE b.genre = :genre"),
-        @NamedQuery(name="Buch.findByAutor", query="SELECT b FROM Buch b JOIN Autor a WHERE a.id = :id"),
-})
-
 @Entity
 @Table (name = "buch")
 public class Buch {
@@ -85,7 +78,6 @@ public class Buch {
     public void setAutor(Collection<Autor> autor) {
         this.autor = autor;
     }
-
 
     //ManyToOne Getter&Setter
     public Genre getGenre() {

@@ -7,6 +7,11 @@
         <class>at.fhj.swd.main.Verlag</class>
         <class>at.fhj.swd.main.Einzelbuero</class>
         <class>at.fhj.swd.main.Genre</class>
+        <class>at.fhj.swd.main.BuchRepository</class>
+        <class>at.fhj.swd.main.AutorRepository</class>
+        <class>at.fhj.swd.main.VerlagRepository</class>
+        <class>at.fhj.swd.main.GenreRepository</class>
+        <class>at.fhj.swd.main.EinzelbueroRepository</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>

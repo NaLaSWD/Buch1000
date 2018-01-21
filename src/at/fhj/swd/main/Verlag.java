@@ -5,12 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-@Entity(name="Verlag")
-@NamedQueries({
-        @NamedQuery(name="Verlag.findById", query="SELECT v FROM Verlag v WHERE v.id = :id"),
-        @NamedQuery(name="Verlag.findByAutor", query="SELECT v FROM Verlag v JOIN Autor a WHERE a.name = :name"),
-})
-
 @Entity
 @Table(name = "verlag")
 public class Verlag {

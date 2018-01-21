@@ -29,7 +29,6 @@ public class EinzelbueroTest {
         Transaction.commit();
     }
 
-
     @Test
     public void create () {
         Transaction.begin();

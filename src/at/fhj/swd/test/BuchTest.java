@@ -31,12 +31,16 @@ public class BuchTest {
             Transaction.commit();
         }
 
-
         @Test
         public void create () {
             Transaction.begin();
             buchRepository.create(id, isbn, jahr, titel);
             Transaction.commit();
+        }
+
+        @Test public void getFindTitleByIdQuery () {
+            String result = buchRepository.findTitleByTitel(id);
+            assertEquals(titel, result);
         }
 
         @Test

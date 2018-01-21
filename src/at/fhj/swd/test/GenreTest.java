@@ -34,6 +34,11 @@ public class GenreTest {
         Transaction.commit();
     }
 
+    @Test public void getFindGenreByIdQuery () {
+        String result = genreRepository.findGenreById(id);
+        assertEquals(genre, result);
+    }
+
     @Test
     public void modify(){
         Genre thriller = genreRepository.find(id);

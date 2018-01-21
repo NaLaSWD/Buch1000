@@ -3,7 +3,14 @@ package at.fhj.swd.main;
 import at.fhj.swd.persistence.IRepository;
 import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+
+@Entity
+@NamedQueries({
+        @NamedQuery(name="VerlagRepository.findOrtById", query="SELECT v.ort FROM Verlag v WHERE v.id = :id"),
+        @NamedQuery(name="VerlagRepository.findByAutor", query="SELECT v FROM Verlag v JOIN Autor a WHERE a.vorname = :name"),
+})
 
 public class VerlagRepository extends Repository<Verlag> implements IRepository<Verlag> {
 
@@ -30,6 +37,12 @@ public class VerlagRepository extends Repository<Verlag> implements IRepository<
         Verlag verlAut = new Verlag(id, name, ort, strasse, plz);
         entityManager.persist(verlAut);
         return verlAut;
+    }
+
+    public String findOrtById(int id) {
+        TypedQuery<String> query = entityManager.createNamedQuery("VerlagRepository.findOrtById", String.class);
+        query.setParameter ("id", id);
+        return query.getSingleResult();
     }
 }
 
