@@ -5,6 +5,7 @@ import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -35,8 +36,8 @@ public class BuchRepository extends Repository<Buch> implements IRepository<Buch
         Persistence.resetSequence(schema, sequence);
     }
 
-    public Buch create(int id, int isbn, int jahr, String titel) {
-        Buch buch1 = new Buch(id, isbn, jahr, titel);
+    public Buch create(int id, int isbn, int jahr, String titel, Genre genre, List<Autor> autor) {
+        Buch buch1 = new Buch(id, isbn, jahr, titel, genre, autor);
         entityManager.persist(buch1);
         return buch1;
     }

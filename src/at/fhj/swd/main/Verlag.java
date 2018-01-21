@@ -3,6 +3,7 @@ package at.fhj.swd.main;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +25,7 @@ public class Verlag {
         this.ort = ort;
         this.strasse = strasse;
         this.plz = plz;
+        autor = new ArrayList<>();
     }
 
     public Verlag() {
@@ -88,6 +90,9 @@ public class Verlag {
         this.autor = autor;
     }
 
+    public void addAutor(Autor autor) {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,7 +107,7 @@ public class Verlag {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id, name, ort, strasse, plz);
     }
+
 }

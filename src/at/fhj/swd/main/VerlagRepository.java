@@ -5,6 +5,7 @@ import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -33,10 +34,10 @@ public class VerlagRepository extends Repository<Verlag> implements IRepository<
         Persistence.resetSequence(schema, sequence);
     }
 
-    public Verlag create(int id, String name, String ort, String strasse, int plz) {
-        Verlag verlAut = new Verlag(id, name, ort, strasse, plz);
-        entityManager.persist(verlAut);
-        return verlAut;
+    public Verlag create(int id, String name, String ort, String strasse, int plz, List<Autor> autor) {
+        Verlag verlag = new Verlag(id, name, ort, strasse, plz);
+        entityManager.persist(verlag);
+        return verlag;
     }
 
     public String findOrtById(int id) {

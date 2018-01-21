@@ -1,11 +1,14 @@
 package at.fhj.swd.test;
 
+import at.fhj.swd.main.Autor;
 import at.fhj.swd.main.Einzelbuero;
 import at.fhj.swd.main.EinzelbueroRepository;
 import at.fhj.swd.util.Transaction;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +22,7 @@ public class EinzelbueroTest {
     static final String strasse = "Strass 1";
     static final int plz = 8010;
     static final int plzUpdate = 8020 ;
+    static List<Autor> autor;
 
     @BeforeClass
     public static void setup() {
@@ -32,7 +36,7 @@ public class EinzelbueroTest {
     @Test
     public void create () {
         Transaction.begin();
-        einzelbueroRepository.create(id, ort, strasse, plz);
+        einzelbueroRepository.create(id, ort, strasse, plz, (Autor) autor);
         Transaction.commit();
     }
 

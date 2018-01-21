@@ -3,6 +3,7 @@ package at.fhj.swd.main;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,22 +16,26 @@ public class Autor {
     @ManyToOne
     private Verlag verlag;
 
+    @OneToOne
+    private Einzelbuero einzelbuero;
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String vorname;
     private String nachname;
     private String geb_datum;
 
-    public Autor(int id, String vorname, String nachname, String geb_datum, Verlag verlag) {
+    public Autor(int id, String vorname, String nachname, String geb_datum, List<Buch> buch, List<Verlag> verlag, Einzelbuero einzelbuero ) {
         this.id = id;
         this.vorname = vorname;
         this.nachname = nachname;
         this.geb_datum = geb_datum;
-        setVerlag(verlag);
-        buch = new ArrayList<>();
+        buch = new ArrayList<Buch>();
+        verlag = new ArrayList<Verlag>();
+        setEinzelbuero(einzelbuero);
     }
 
-    public Autor() {
+    public Autor(){
     }
 
     @Id
@@ -89,6 +94,20 @@ public class Autor {
 
     public void setVerlag(Verlag verlag) {
         this.verlag = verlag;
+        verlag.addAutor(this);
+    }
+
+    //OneToOne
+    public Einzelbuero getEinzelbuero() {
+        return einzelbuero;
+    }
+
+    public void setEinzelbuero(Einzelbuero einzelbuero) {
+        this.einzelbuero = einzelbuero;
+        einzelbuero.addAutor(this);
+    }
+
+    public void addEinzelbuero(Einzelbuero einzelbuero) {
     }
 
     @Override

@@ -5,6 +5,7 @@ import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -33,8 +34,8 @@ public class GenreRepository extends Repository<Genre> implements IRepository<Ge
         Persistence.resetSequence(schema, sequence);
     }
 
-    public Genre create(int id, String genre) {
-        Genre thriller = new Genre(id, genre);
+    public Genre create(int id, String genre, List<Buch> buch) {
+        Genre thriller = new Genre(id, genre, buch);
         entityManager.persist(thriller);
         return thriller;
     }

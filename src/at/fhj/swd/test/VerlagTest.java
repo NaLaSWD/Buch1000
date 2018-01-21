@@ -1,11 +1,14 @@
 package at.fhj.swd.test;
 
+import at.fhj.swd.main.Autor;
 import at.fhj.swd.main.Verlag;
 import at.fhj.swd.main.VerlagRepository;
 import at.fhj.swd.util.Transaction;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,6 +25,7 @@ public class VerlagTest {
     static final String strasse = "Heimweg 10";
     static final int plz = 8010;
     static final String strasseUpdate = "Hausstrasse 20";
+    static List<Autor> autor;
 
     @BeforeClass
     public static void setup() {
@@ -36,7 +40,7 @@ public class VerlagTest {
     @Test
     public void create () {
         Transaction.begin();
-        verlagRepository.create(id, name, ort, strasse, plz);
+        verlagRepository.create(id, name, ort, strasse, plz, autor);
         Transaction.commit();
     }
 

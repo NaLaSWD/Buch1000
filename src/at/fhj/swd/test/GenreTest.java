@@ -1,11 +1,14 @@
 package at.fhj.swd.test;
 
+import at.fhj.swd.main.Buch;
 import at.fhj.swd.main.Genre;
 import at.fhj.swd.main.GenreRepository;
 import at.fhj.swd.util.Transaction;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -18,6 +21,7 @@ public class GenreTest {
     private static int id = 97;
     private static String genre = "Thriller";
     private static String genreUpdate = "Romane";
+    private List<Buch> buch;
 
     @BeforeClass
     public static void setup(){
@@ -30,7 +34,7 @@ public class GenreTest {
     @Test
     public void create(){
         Transaction.begin();
-        genreRepository.create(id, genre);
+        genreRepository.create(id, genre, buch);
         Transaction.commit();
     }
 

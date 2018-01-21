@@ -3,6 +3,7 @@ package at.fhj.swd.main;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,11 +14,12 @@ public class Genre {
     private String genre;
 
     @OneToMany (mappedBy = "genre" )
-    private Collection<Buch> events = new ArrayList<Buch>();
+    private Collection<Buch> buch = new ArrayList<Buch>();
 
-    public Genre(int id, String genre) {
+    public Genre(int id, String genre, List<Buch> buch) {
         this.id = id;
         this.genre = genre;
+        buch = new ArrayList<>();
     }
 
     public Genre() {
@@ -42,6 +44,15 @@ public class Genre {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
+    //OneToMany
+    public Collection<Buch> getBuch() {
+        return buch;
+    }
+
+    public void setBuch(Collection<Buch> buch) {
+        this.buch = buch;
+        }
 
     @Override
     public boolean equals(Object o) {

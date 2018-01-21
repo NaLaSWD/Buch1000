@@ -17,11 +17,12 @@ public class Einzelbuero {
     @OneToOne
     private Autor autor;
 
-    public Einzelbuero(int id, String ort, String strasse, int plz) {
+    public Einzelbuero(int id, String ort, String strasse, int plz, Autor autor) {
         setId(id);
         setOrt(ort);
         setStrasse(strasse);
         setPlz(plz);
+        setAutor(autor);
     }
 
     public Einzelbuero() {
@@ -65,6 +66,15 @@ public class Einzelbuero {
 
     public void setPlz(int plz) {
         this.plz = plz;
+    }
+
+    //OneToOne
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+        autor.addEinzelbuero(this);
+    }
+
+    public void addAutor(Autor autor) {
     }
 
     @Override

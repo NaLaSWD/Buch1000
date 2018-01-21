@@ -1,8 +1,11 @@
 package at.fhj.swd.main;
 
+import com.sun.tools.javah.Gen;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,11 +23,13 @@ public class Buch {
     @ManyToOne
     private Genre genre;
 
-    public Buch(int id, int isbn, int jahr, String titel) {
+    public Buch(int id, int isbn, int jahr, String titel, Genre genre, List<Autor> autor) {
         setId(id);
         setIsbn(isbn);
         setJahr(jahr);
         setTitel(titel);
+        setGenre(genre);
+        autor = new ArrayList<>();
     }
 
     public Buch() {

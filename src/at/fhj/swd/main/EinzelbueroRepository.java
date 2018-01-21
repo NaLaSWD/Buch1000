@@ -29,8 +29,8 @@ public class EinzelbueroRepository extends Repository<Einzelbuero> implements IR
         Persistence.resetSequence(schema, sequence);
     }
 
-    public Einzelbuero create(int id, String ort, String strasse, int plz) {
-        Einzelbuero einzelbuero1 = new Einzelbuero(id, ort, strasse, plz);
+    public Einzelbuero create(int id, String ort, String strasse, int plz, Autor autor) {
+        Einzelbuero einzelbuero1 = new Einzelbuero(id, ort, strasse, plz, autor);
         entityManager.persist(einzelbuero1);
         return einzelbuero1;
     }

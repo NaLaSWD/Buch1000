@@ -1,11 +1,12 @@
 package at.fhj.swd.test;
 
-import at.fhj.swd.main.Autor;
-import at.fhj.swd.main.AutorRepository;
+import at.fhj.swd.main.*;
 import at.fhj.swd.util.Transaction;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +20,9 @@ public class AutorTest {
     static final String nachname = "Mayer";
     static final String geb_datum = "14.02.1966";
     static final String vornameUpdate = "Martin";
+    static List<Buch> buch;
+    static List<Verlag> verlag;
+    static Einzelbuero einzelbuero;
 
     @BeforeClass
     public static void setup() {
@@ -32,7 +36,7 @@ public class AutorTest {
     @Test
     public void create () {
         Transaction.begin();
-        autorRepository.create(id, vorname, nachname, geb_datum);
+        autorRepository.create(id, vorname, nachname, geb_datum, buch, verlag, einzelbuero);
         Transaction.commit();
     }
 
