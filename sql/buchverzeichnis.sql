@@ -2,7 +2,8 @@
        ID SERIAL NOT NULL,
        VORNAME varchar(255),
        NACHNAME varchar(255),
-       GEB_DATUM VARCHAR(255),
+              /*date?*/
+       GEB_DATUM date,
        FK_EINZELBUERO int4,
        FK_VERLAG int4 ,
        PRIMARY KEY (ID));
@@ -26,13 +27,15 @@ CREATE TABLE BUCH_AUTOR (
        ID SERIAL NOT NULL,
        BUCH_ID int4 NOT NULL,
        AUTOR_ID int4 NOT NULL,
-       PRIMARY KEY (ID));
+
 
  CREATE TABLE BUCH (
        ID SERIAL NOT NULL,
        ISBN int4,
        TITEL varchar(255),
-       JAHR int4,
+
+                      /*Date?!*/
+       ERSCHEINUNGSJAHR date,
        FK_GENRE int4,
        PRIMARY KEY (ID));
 

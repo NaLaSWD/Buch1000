@@ -2,16 +2,16 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
     <persistence-unit name="db_lanner16" transaction-type="RESOURCE_LOCAL">
-        <class>at.fhj.swd.main.Buch</class>
-        <class>at.fhj.swd.main.Autor</class>
-        <class>at.fhj.swd.main.Verlag</class>
-        <class>at.fhj.swd.main.Einzelbuero</class>
-        <class>at.fhj.swd.main.Genre</class>
-        <class>at.fhj.swd.main.BuchRepository</class>
-        <class>at.fhj.swd.main.AutorRepository</class>
-        <class>at.fhj.swd.main.VerlagRepository</class>
-        <class>at.fhj.swd.main.GenreRepository</class>
-        <class>at.fhj.swd.main.EinzelbueroRepository</class>
+        <class>at.fhj.swd.buchverzeichnis.main.Buch</class>
+        <class>at.fhj.swd.buchverzeichnis.main.Autor</class>
+        <class>at.fhj.swd.buchverzeichnis.main.Verlag</class>
+        <class>at.fhj.swd.buchverzeichnis.main.Einzelbuero</class>
+        <class>at.fhj.swd.buchverzeichnis.main.Genre</class>
+        <class>at.fhj.swd.buchverzeichnis.main.BuchRepository</class>
+        <class>at.fhj.swd.buchverzeichnis.main.AutorRepository</class>
+        <class>at.fhj.swd.buchverzeichnis.main.VerlagRepository</class>
+        <class>at.fhj.swd.buchverzeichnis.main.GenreRepository</class>
+        <class>at.fhj.swd.buchverzeichnis.main.EinzelbueroRepository</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
