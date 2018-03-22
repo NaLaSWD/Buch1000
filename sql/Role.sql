@@ -1,25 +1,25 @@
 -- Reader Role --
-CREATE ROLE autor;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO autor;
+CREATE ROLE buchverzeichnis_reader_role;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO buchverzeichnis_reader_role;
 
 -- Writer Role --
-CREATE ROLE verlag;
-GRANT autor TO verlag;
-GRANT INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO verlag;
-GRANT SELECT,UPDATE ON ALL SEQUENCES IN SCHEMA public TO verlag;
+CREATE ROLE buchverzeichnis_writer_role;
+GRANT buchverzeichnis_reader_role TO buchverzeichnis_writer_role;
+GRANT INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO buchverzeichnis_writer_role;
+GRANT SELECT,UPDATE ON ALL SEQUENCES IN SCHEMA public TO buchverzeichnis_writer_role;
 
 -- Admin Role --
-CREATE ROLE admin;
-GRANT verlag TO admin;
-GRANT CREATE ON SCHEMA public TO admin;
-GRANT DELETE ON ALL TABLES IN SCHEMA public TO admin;
+CREATE ROLE buchverzeichnis_admin_role;
+GRANT buchverzeichnis_writer_role TO buchverzeichnis_admin_role;
+GRANT CREATE ON SCHEMA public TO buchverzeichnis_admin_role;
+GRANT DELETE ON ALL TABLES IN SCHEMA public TO buchverzeichnis_admin_role;
 
 -- Users --
-CREATE USER max WITH PASSWORD 'power';
-GRANT autor TO max;
-CREATE USER martha WITH PASSWORD 'stewart';
-GRANT autor TO martha;
-CREATE USER john WITH PASSWORD 'james';
-GRANT verlag TO john;
-CREATE USER jack WITH PASSWORD 'jones';
-GRANT admin TO jack;
+CREATE USER buchverzeichnis_user_read WITH PASSWORD 'power';
+GRANT buchverzeichnis_reader_role TO buchverzeichnis_user_read;
+
+CREATE USER buchverzeichnis_user_write WITH PASSWORD 'james';
+GRANT buchverzeichnis_writer_role TO buchverzeichnis_user_write;
+
+CREATE USER buchverzeichnis_user_admin WITH PASSWORD 'jones';
+GRANT buchverzeichnis_admin_role TO buchverzeichnis_user_admin;

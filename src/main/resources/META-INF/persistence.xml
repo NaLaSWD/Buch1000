@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="buchverzeichnis" transaction-type="RESOURCE_LOCAL">
+        <class>at.fhj.swd.buchverzeichnis.Buch</class>
+        <class>at.fhj.swd.buchverzeichnis.Autor</class>
+        <class>at.fhj.swd.buchverzeichnis.Verlag</class>
+        <class>at.fhj.swd.buchverzeichnis.Einzelbuero</class>
+        <class>at.fhj.swd.buchverzeichnis.Genre</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://10.65.1.37:5433/db_lanner16"/>
+            <property name="javax.persistence.jdbc.user" value="lanner16"/>
+            <property name="javax.persistence.jdbc.password" value="lanner16"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
