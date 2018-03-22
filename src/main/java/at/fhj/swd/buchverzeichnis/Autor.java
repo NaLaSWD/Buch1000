@@ -1,12 +1,6 @@
 package at.fhj.swd.buchverzeichnis;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,11 +14,11 @@ public class Autor {
     private String nachname;
     @Temporal(TemporalType.DATE)
     private Date geb_datum;
-    @ManyToMany
+    @ManyToMany //(mappedBy = "autor")
     private Collection<Buch> buecher;
     @ManyToOne
     private Verlag verlag;
-    @OneToOne(mappedBy = "autor")
+    @OneToOne //(mappedBy = "autor")
     private Einzelbuero einzelbuero;
 
     protected Autor(){

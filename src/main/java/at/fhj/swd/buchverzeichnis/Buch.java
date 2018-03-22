@@ -1,11 +1,6 @@
 package at.fhj.swd.buchverzeichnis;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.ManyToOne;
-import javax.persistence.ManyToMany;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -19,9 +14,9 @@ public class Buch {
     private String titel;
     @Temporal(TemporalType.DATE)
     private Date erscheinungsjahr;
-    @ManyToMany
+    @ManyToMany //(mappedBy = "buch")
     private Collection<Autor> autoren;
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Genre genre;
 
     protected Buch() {
@@ -72,8 +67,8 @@ public class Buch {
         return autoren;
     }
 
-    public void addAutor(Autor autor){
-        if(!autoren.contains(autor)){
+    public void addAutor(Autor autor) {
+        if (!autoren.contains(autor)) {
             autoren.add(autor);
         }
         autor.addBuch(this);

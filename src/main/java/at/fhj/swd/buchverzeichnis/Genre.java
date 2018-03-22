@@ -11,7 +11,7 @@ public class Genre {
     @Id
     private int id;
     private String genre;
-    @OneToMany(mappedBy = "genre")
+    @OneToMany //(mappedBy = "genre")
     private Collection<Buch> buecher;
 
     protected Genre(){
@@ -48,4 +48,5 @@ public class Genre {
     public Collection<Buch> getBuecher() {
         return buecher;
     }
+
 }

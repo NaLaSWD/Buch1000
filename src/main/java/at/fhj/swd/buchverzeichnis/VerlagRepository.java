@@ -4,8 +4,6 @@ import at.fhj.swd.persistence.IRepository;
 import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
-import javax.persistence.TypedQuery;
-
 public class VerlagRepository extends Repository<Verlag> implements IRepository<Verlag> {
 
     private final static String schema = "public";
@@ -31,19 +29,5 @@ public class VerlagRepository extends Repository<Verlag> implements IRepository<
         Persistence.resetSequence(schema, sequence);
     }
 
-
-
-
-  /*  public Verlag create(int id, String name, String ort, String strasse, int plz, List<Autor> autor) {
-        Verlag verlag = new Verlag(id, name, ort, strasse, plz);
-        entityManager.persist(verlag);
-        return verlag;
-    }
-
-    public String findOrtById(int id) {
-        TypedQuery<String> query = entityManager.createNamedQuery("VerlagRepository.findOrtById", String.class);
-        query.setParameter ("id", id);
-        return query.getSingleResult();
-    } */
 }
 
