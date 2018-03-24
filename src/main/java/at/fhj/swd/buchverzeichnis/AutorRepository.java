@@ -20,8 +20,8 @@ public class AutorRepository extends Repository<Autor> implements IRepository<Au
         super(user, password, Autor.class);
     }
 
-    public Autor create(int id, String vorname, String nachname, Date geb_datum) {
-        Autor autor = new Autor(id, vorname, nachname, geb_datum);
+    public Autor create(int id, String vorname, String nachname, Date geb_datum, Verlag verlag, Einzelbuero einzelbuero) {
+        Autor autor = new Autor(id, vorname, nachname, geb_datum, verlag, einzelbuero);
         entityManager.persist(autor);
         return autor;
     }

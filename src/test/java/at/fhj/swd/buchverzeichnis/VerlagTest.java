@@ -16,14 +16,14 @@ import static org.junit.Assert.assertNull;
 @org.junit.FixMethodOrder( org.junit.runners.MethodSorters.NAME_ASCENDING)
 public class VerlagTest {
 
-    private static VerlagRepository verlagRepository;
-     static final int id = 158;
-    private static final String name = "VerlAut";
-    private static final String strasse = "Heimweg 10";
-    private static final String ort = "Graz";
-    private static final int plz = 8010;
-    private static final String strasseUpdate = "Hausstrasse 20";
-    private static List<Autor> autor = new ArrayList<>();
+    static VerlagRepository verlagRepository;
+    static final int id = 158;
+    static final String name = "VerlAut";
+    static final String strasse = "Heimweg 10";
+    static final String ort = "Graz";
+    static final int plz = 8010;
+    static final String strasseUpdate = "Hausstrasse 20";
+    static List<Autor> autor = new ArrayList<>();
 
     @BeforeClass
     public static void setup() {

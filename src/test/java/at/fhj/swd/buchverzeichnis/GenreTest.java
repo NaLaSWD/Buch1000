@@ -15,11 +15,11 @@ import static org.junit.Assert.assertNull;
 @org.junit.FixMethodOrder( org.junit.runners.MethodSorters.NAME_ASCENDING)
 public class GenreTest {
 
-    private static GenreRepository genreRepository;
-    private static int id = 97;
-    private static String genre = "Thriller";
-    private static String genreUpdate = "Romane";
-    private List<Buch> buch = new ArrayList<>();
+    static GenreRepository genreRepository;
+    static int id = 97;
+    static String genre = "Thriller";
+    static String genreUpdate = "Romane";
+    static List<Buch> buch = new ArrayList<>();
 
     @BeforeClass
     public static void setup(){

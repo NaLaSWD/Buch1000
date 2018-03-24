@@ -14,7 +14,7 @@ public class Verlag {
     private String ort;
     private String strasse;
     private int plz;
-    @OneToMany//(mappedBy = "verlag")
+    @OneToMany(mappedBy = "verlag")
     private Collection<Autor> autoren;
 
     protected Verlag(){

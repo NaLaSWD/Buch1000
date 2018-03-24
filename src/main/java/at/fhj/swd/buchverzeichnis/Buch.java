@@ -14,7 +14,7 @@ public class Buch {
     private String titel;
     @Temporal(TemporalType.DATE)
     private Date erscheinungsjahr;
-    @ManyToMany //(mappedBy = "buch")
+    @ManyToMany(mappedBy = "buecher")
     private Collection<Autor> autoren;
     @ManyToOne (cascade = CascadeType.PERSIST)
     private Genre genre;
@@ -22,7 +22,7 @@ public class Buch {
     protected Buch() {
     }
 
-    public Buch(int id, int isbn, Date erscheinungsjahr, String titel) {
+    public Buch(int id, int isbn, Date erscheinungsjahr, String titel, Genre genre) {
         setId(id);
         setIsbn(isbn);
         setTitel(titel);

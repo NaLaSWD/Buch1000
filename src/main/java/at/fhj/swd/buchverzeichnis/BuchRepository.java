@@ -20,8 +20,8 @@ public class BuchRepository extends Repository<Buch> implements IRepository<Buch
         super(user, password, Buch.class);
     }
 
-    public Buch create(int id, int isbn, Date erscheinungsjahr, String titel) {
-        Buch buch = new Buch(id, isbn, erscheinungsjahr, titel);
+    public Buch create(int id, int isbn, Date erscheinungsjahr, String titel, Genre genre) {
+        Buch buch = new Buch(id, isbn, erscheinungsjahr, titel, genre);
         entityManager.persist(buch);
         return buch;
     }

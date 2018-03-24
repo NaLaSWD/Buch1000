@@ -15,8 +15,25 @@ import static org.junit.Assert.*;
 @org.junit.FixMethodOrder( org.junit.runners.MethodSorters.NAME_ASCENDING)
 public class AutorTest {
 
+    static VerlagRepository verlagRepository;
+    static final int vid = 158;
+    static final String name = "VerlAut";
+    static final String strasse = "Heimweg 10";
+    static final String ort = "Graz";
+    static final int plz = 8010;
+    static final String strasseUpdate = "Hausstrasse 20";
+    static List<Autor> autor = new ArrayList<>();
+
+    static EinzelbueroRepository einzelbueroRepository;
+    static final int eid = 123;
+    static final String eort = "Graz";
+    static final String estrasse = "Strass 1";
+    static final int eplz = 8010;
+    static final int eplzUpdate = 8020 ;
+    static List<Autor> eautor = new ArrayList<>();
+
     static AutorRepository autorRepository;
-    static final int id = 567;
+    static final int aid = 567;
     static final String vorname = "Max";
     static final String nachname = "Mayer";
     static Date geb_datum;
@@ -27,41 +44,47 @@ public class AutorTest {
 
     @BeforeClass
     public static void setup() {
+        verlagRepository = new VerlagRepository();
+        einzelbueroRepository = new EinzelbueroRepository();
         autorRepository = new AutorRepository();
         Transaction.begin();
         autorRepository.reset();
+        einzelbueroRepository.reset();
+        verlagRepository.reset();
         Transaction.commit();
     }
 
     @Test
     public void create () {
         Transaction.begin();
-        autorRepository.create(id, vorname, nachname, geb_datum);
+        verlag = verlagRepository.create(vid, name, strasse, ort, plz);
+        einzelbuero = einzelbueroRepository.create(eid, eort, estrasse, eplz);
+        autorRepository.create(aid, vorname, nachname, geb_datum, verlag, einzelbuero);
         Transaction.commit();
     }
 
     @Test
     public void modify () {
-        Autor autor = autorRepository.find(id);
+        Autor autor = autorRepository.find(aid);
         assertNotNull (autor);
         Transaction.begin();
 
         autor.setVorname(vornameUpdate);
         Transaction.commit();
 
-        autor = autorRepository.find(id);
+        autor = autorRepository.find(aid);
         assertEquals(vornameUpdate, (String) autor.getVorname());
     }
 
     @Test
     public void remove() {
-        Autor autor = autorRepository.find(id);
+        Autor autor = autorRepository.find(aid);
         assertNotNull (autor);
         Transaction.begin ();
 
         autorRepository.remove(autor);
         Transaction.commit();
-        autor = autorRepository.find(id);
+        autor = autorRepository.find(aid);
         assertNull (autor);
     }
 

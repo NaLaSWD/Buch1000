@@ -14,17 +14,17 @@ public class Autor {
     private String nachname;
     @Temporal(TemporalType.DATE)
     private Date geb_datum;
-    @ManyToMany //(mappedBy = "autor")
+    @ManyToMany
     private Collection<Buch> buecher;
     @ManyToOne
     private Verlag verlag;
-    @OneToOne //(mappedBy = "autor")
+    @OneToOne
     private Einzelbuero einzelbuero;
 
     protected Autor(){
     }
 
-    public Autor(int id, String vorname, String nachname, Date geb_datum) {
+    public Autor(int id, String vorname, String nachname, Date geb_datum, Verlag verlag, Einzelbuero einzelbuero) {
         setId(id);
         setVorname(vorname);
         setNachname(nachname);

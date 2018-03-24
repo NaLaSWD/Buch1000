@@ -12,7 +12,7 @@ public class Einzelbuero {
     private String ort;
     private String strasse;
     private int plz;
-    @OneToOne//(mappedBy = "einzelbuero")
+    @OneToOne(mappedBy = "einzelbuero")
     private Autor autor;
 
     protected Einzelbuero() {
@@ -23,7 +23,6 @@ public class Einzelbuero {
         setOrt(ort);
         setStrasse(strasse);
         setPlz(plz);
-        setAutor(autor);
     }
 
 
