@@ -4,7 +4,9 @@ import at.fhj.swd.util.Transaction;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.CORBA.TRANSACTION_MODE;
 
+import java.nio.file.attribute.AclEntry;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +69,8 @@ public class AutorBuchTest {
     static Verlag verlag;
     static Einzelbuero einzelbuero;
 
-    static GenreRepository genreRepository;static int gid = 97;
+    static GenreRepository genreRepository;
+    static int gid = 97;
     static String genreDescription = "Thriller";
     static String genreUpdate = "Romane";
     //static List<Buch> buch = new ArrayList<>();
@@ -92,11 +95,11 @@ public class AutorBuchTest {
         autorRepository = new AutorRepository();
         buchRepository = new BuchRepository();
         Transaction.begin();
-        autorRepository.reset();
+        /*autorRepository.reset();
         buchRepository.reset();
         genreRepository.reset();
         verlagRepository.reset();
-        einzelbueroRepository.reset();
+        einzelbueroRepository.reset();*/
         Transaction.commit();
     }
 
@@ -120,7 +123,19 @@ public class AutorBuchTest {
 
     @Test
     public void modify() {
-        //TODO
+        final int xid = 160;
+        final int isbn = 8888;
+        final String titel = "Java 9";
+
+        Transaction.begin();
+        Buch newbuch = buchRepository.create(xid, isbn, erscheinungsjahr, titel, genre);
+        Transaction.commit();
+
+        Transaction.begin();
+        autor.addBuch(newbuch);
+        Transaction.commit();
+
+
     }
 
     @Test
@@ -130,12 +145,12 @@ public class AutorBuchTest {
 
     @AfterClass
     public static void teardown() {
-        Transaction.begin();
+        /*Transaction.begin();
         autorRepository.reset();
         buchRepository.reset();
         genreRepository.reset();
         verlagRepository.reset();
         einzelbueroRepository.reset();
-        Transaction.commit();
+        Transaction.commit();*/
     }
 }
