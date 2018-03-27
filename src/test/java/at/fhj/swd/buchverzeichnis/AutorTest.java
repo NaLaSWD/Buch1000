@@ -92,6 +92,8 @@ public class AutorTest {
     public static void teardown() {
         Transaction.begin();
         autorRepository.reset();
+        einzelbueroRepository.reset();
+        verlagRepository.reset();
         Transaction.commit();
     }
 
