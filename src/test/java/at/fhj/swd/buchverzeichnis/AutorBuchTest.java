@@ -19,28 +19,6 @@ import static org.junit.Assert.assertTrue;
 @org.junit.FixMethodOrder( org.junit.runners.MethodSorters.NAME_ASCENDING)
 public class AutorBuchTest {
 
-    /*static BuchRepository buchRepository;
-    static final int bid = 158;
-    static final int bid2 = 565;
-    static final int isbn = 5656;
-    static final int isbn2 = 2920;
-    static Date erscheinungsjahr ;
-    static Date erscheinungsjahr2;
-    static final String titel = "DB_Buch";
-    static final String titel2 = "Datenbanken";
-    static Genre genre;
-    static List<Autor> autor = new ArrayList<>();
-
-    static Buch buchIsbn;
-    static Buch buchIsbn2;*/
-
-    /*static Autor SimonBeckett;
-    static AutorRepository autorRepository;
-    static Verlag verlag;
-    static VerlagRepository verlagRepository;
-    static Einzelbuero einzelbuero;
-    static EinzelbueroRepository einzelbueroRepository;*/
-
     static VerlagRepository verlagRepository;
     static final int vid = 158;
     static final String name = "VerlAut";
@@ -73,7 +51,6 @@ public class AutorBuchTest {
     static int gid = 97;
     static String genreDescription = "Thriller";
     static String genreUpdate = "Romane";
-    //static List<Buch> buch = new ArrayList<>();
     static Buch buch;
 
 
@@ -84,7 +61,6 @@ public class AutorBuchTest {
     static final String titel = "DB_Buch";
     static final int isbnUpdate = 7575;
     static Genre genre;
-    //static List<Autor> autoren = new ArrayList<>();
 
 
     @BeforeClass
@@ -95,11 +71,13 @@ public class AutorBuchTest {
         autorRepository = new AutorRepository();
         buchRepository = new BuchRepository();
         Transaction.begin();
-        /*autorRepository.reset();
+
+        autorRepository.reset();
         buchRepository.reset();
         genreRepository.reset();
         verlagRepository.reset();
-        einzelbueroRepository.reset();*/
+        einzelbueroRepository.reset();
+
         Transaction.commit();
     }
 
@@ -112,8 +90,8 @@ public class AutorBuchTest {
         genre = genreRepository.create(gid, genreDescription);
         buch = buchRepository.create(bid, isbn, erscheinungsjahr, titel, genre);
         Transaction.commit();
-        buch = null;
-        autor = null;
+        //buch = null;
+        //autor = null;
         buch = buchRepository.find(bid);
         autor = autorRepository.find(aid);
         Transaction.begin();
@@ -134,23 +112,21 @@ public class AutorBuchTest {
         Transaction.begin();
         autor.addBuch(newbuch);
         Transaction.commit();
-
-
     }
 
     @Test
     public void remove() {
-        //TODO
+        //ToDo
     }
 
     @AfterClass
     public static void teardown() {
-        /*Transaction.begin();
+        Transaction.begin();
         autorRepository.reset();
         buchRepository.reset();
         genreRepository.reset();
         verlagRepository.reset();
         einzelbueroRepository.reset();
-        Transaction.commit();*/
+        Transaction.commit();
     }
 }

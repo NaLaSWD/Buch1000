@@ -18,8 +18,8 @@ public class GenreRepository extends Repository<Genre> implements IRepository<Ge
         super(user, password, Genre.class);
     }
 
-    public Genre create(int id, String genre) {
-        Genre thriller = new Genre(id, genre);
+    public Genre create(int id, String genre_bezeichnung) {
+        Genre thriller = new Genre(id, genre_bezeichnung);
         entityManager.persist(thriller);
         return thriller;
     }
