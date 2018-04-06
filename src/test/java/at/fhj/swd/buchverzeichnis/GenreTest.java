@@ -17,7 +17,7 @@ public class GenreTest {
 
     static GenreRepository genreRepository;
     static int id = 97;
-    static String genre_bezeichnung = "Thriller";
+    static String bezeichnung = "Thriller";
     static String genreUpdate = "Romane";
     static List<Buch> buch = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class GenreTest {
     @Test
     public void create(){
         Transaction.begin();
-        genreRepository.create(id, genre_bezeichnung);
+        genreRepository.create(id, bezeichnung);
         Transaction.commit();
     }
 
@@ -42,12 +42,15 @@ public class GenreTest {
         assertNotNull (thriller);
         Transaction.begin();
 
-        thriller.setGenre_bezeichnung(genreUpdate);
+        thriller.setBezeichnung(genreUpdate);
         Transaction.commit();
 
         thriller = genreRepository.find(id);
-        assertEquals(genreUpdate, (String) thriller.getGenre_bezeichnung());
+        assertEquals(genreUpdate, (String) thriller.getBezeichnung());
     }
+
+
+
 
     @Test
     public void remove () {

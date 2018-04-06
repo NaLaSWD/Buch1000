@@ -7,20 +7,20 @@ import java.util.Date;
 
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name  = "findAutorByVerlag",
+/*@NamedQueries({
+    @NamedQuery(name  = "Autor.findAutorByVerlag",
                 query = "SELECT A.ID AS AutorID, A.Nachname AS Autor_LastName, V.Name AS Verlag "+
                         "FROM Autor A LEFT JOIN Verlag V "+
                         "ON A.Verlag_ID = V.ID " +
                         "WHERE V.Name  = :Verlag"),
 
-    @NamedQuery(name  = "findEinzelbueroByVerlag",
+    @NamedQuery(name  = "Autor.findEinzelbueroByVerlag",
                 query = "SELECT E.ID AS BueroID, E.Strasse, V.Name AS Verlagname "+
                         "FROM Verlag V INNER JOIN Autor A "+
                         "ON V.ID = A.Verlag_ID INNER JOIN Einzelbuero E " +
                         "ON E.ID = A.Einzelbuero_ID " +
                         "WHERE V.ID = :Verlag"),
-})
+})*/
 
 public class Autor {
     @Id

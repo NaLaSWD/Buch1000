@@ -19,7 +19,7 @@ public class BuchTest {
     static GenreRepository genreRepository;static int gid = 97;
     static String genreDescription = "Thriller";
     static String genreUpdate = "Romane";
-    static List<Buch> buch = new ArrayList<>();
+    static List<Buch> buecher = new ArrayList<>();
 
 
     static BuchRepository buchRepository;
@@ -46,7 +46,7 @@ public class BuchTest {
         public void create () {
             Transaction.begin();
             genre = genreRepository.create(gid, genreDescription);
-            buchRepository.create(bid, isbn, erscheinungsjahr, titel, genre);
+            buecher.add(buchRepository.create(bid, isbn, erscheinungsjahr, titel, genre));
             Transaction.commit();
         }
 
@@ -61,6 +61,18 @@ public class BuchTest {
 
             buch = buchRepository.find(bid);
             assertEquals(isbnUpdate, (int) buch.getIsbn());
+        }
+
+        @Test
+        public void findGenreBezeichnungByBuchTitel(){
+            String result = genreRepository.findGenreBezeichnung(titel);
+            assertEquals(genreDescription, result);
+        }
+
+        @Test
+        public void findBuecherByGenre(){
+            List<Buch> result = genreRepository.findBuecherByGenre(genreDescription);
+            assertEquals(buecher, result);
         }
 
         @Test

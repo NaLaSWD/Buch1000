@@ -10,22 +10,22 @@ import java.util.Date;
 
 @NamedQueries({
     @NamedQuery(name  = "Buch.findBuchIDTitelbyAutorFirstName",
-                query = "SELECT B.ID, B.Titel " +
-                        "FROM Buch B INNER JOIN Autor_Buch BA " +
-                        "ON BA.Buecher_ID = B.ID INNER JOIN Autor A " +
-                        "ON BA.Autoren_ID = A.ID " +
-                        "WHERE A.Vorname  = :AutorFirstname"),
+                query = "SELECT b.id, b.titel " +
+                        "FROM Buch b INNER JOIN Autor_Buch ab " +
+                        "ON ab.buecher.id = b.id INNER JOIN Autor a " +
+                        "ON ab.autoren.id = a.id " +
+                        "WHERE a.vorname  = :AutorFirstname"),
 
     @NamedQuery(name  = "Buch.findBuchIDByErscheinungsjahr",
-                query = "SELECT B.ID, B.Titel" +
-                        "FROM Buch B " +
-                        "WHERE B.Erscheinungsjahr = :Erscheinungsjahr"),
+                query = "SELECT b.id, b.titel " +
+                        "FROM Buch b " +
+                        "WHERE b.erscheinungsjahr = :Erscheinungsjahr"),
 
     @NamedQuery(name  = "Buch.findBuchIDByGenre",
-                query = "SELECT B.ID, B.Titel " +
+                query = "SELECT b.ID, B.Titel " +
                         "FROM BUCH B INNER JOIN Genre G " +
                         "ON B.Genre_ID = G.ID " +
-                        "WHERE G.Genre = :GenreName"),
+                        "WHERE G.Bezeichnung = :GenreName"),
 })
 
 public class Buch {

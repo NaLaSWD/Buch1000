@@ -6,24 +6,23 @@ import java.util.Collection;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name  = "Genre.findGenreIDByBuchTitel",
-                query = "SELECT G.ID, G.Genre " +
-                        "FROM Genre G INNER JOIN Buch B " +
-                        "ON G.ID = B.Genre_ID " +
-                        "WHERE B.Titel = :Buchtitel"),
+    @NamedQuery(name  = "Genre.findGenreBezeichnungByBuchTitel",
+                query = "SELECT g.bezeichnung " +
+                        "FROM Genre g INNER JOIN Buch b " +
+                        "ON g.id = b.genre.id " +
+                        "WHERE b.titel = :Buchtitel"),
 
-    @NamedQuery(name  = "Genre.findBuchTitelByBuchErscheinungsjahrAndGenre",
-                query = "SELECT G.ID, G.Genre, B.Titel "+
-                        "FROM Genre G INNER JOIN Buch B " +
-                        "ON G.ID = B.Genre_ID "+
-                        "WHERE G.Genre = :Genre AND B.Erscheinungsjahr = :Erscheinungsjahr")
-
+    @NamedQuery(name  = "Genre.findBuchTitelByGenre",
+                query = "SELECT g.buecher "+
+                        "FROM Genre g INNER JOIN Buch b " +
+                        "ON g.id = b.genre.id "+
+                        "WHERE g.bezeichnung = :Genre")
 })
 
 public class Genre {
     @Id
     private int id;
-    private String genre_bezeichnung;
+    private String bezeichnung;
     @OneToMany (mappedBy = "genre")
     private Collection<Buch> buecher;
 
@@ -32,7 +31,7 @@ public class Genre {
 
     public Genre(int id, String genre) {
         setId(id);
-        setGenre_bezeichnung(genre);
+        setBezeichnung(genre);
         buecher = new ArrayList<>();
     }
 
@@ -44,12 +43,12 @@ public class Genre {
         this.id = id;
     }
 
-    public String getGenre_bezeichnung() {
-        return genre_bezeichnung;
+    public String getBezeichnung() {
+        return bezeichnung;
     }
 
-    public void setGenre_bezeichnung(String genre) {
-        this.genre_bezeichnung = genre;
+    public void setBezeichnung(String genre) {
+        this.bezeichnung = genre;
     }
 
     void addBuch(Buch buch){
