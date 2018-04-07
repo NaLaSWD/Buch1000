@@ -76,6 +76,19 @@ public class AutorTest {
         assertEquals(vornameUpdate, (String) autor.getVorname());
     }
 
+
+    @Test
+    public void findAutorByVerlag(){
+        String result = autorRepository.findAutorByVerlag(name);
+        assertEquals(name, result);
+    }
+
+    @Test
+    public void findEinzelbueroByVerlag(){
+        String result = autorRepository.findAutorByVerlag(name);
+        assertEquals(buecher, result);
+    }
+
     @Test
     public void remove() {
         Autor autor = autorRepository.find(aid);
