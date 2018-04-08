@@ -49,9 +49,6 @@ public class GenreTest {
         assertEquals(genreUpdate, (String) thriller.getBezeichnung());
     }
 
-
-
-
     @Test
     public void remove () {
         Genre thriller = genreRepository.find(id);

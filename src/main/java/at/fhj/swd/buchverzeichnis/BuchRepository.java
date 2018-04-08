@@ -4,7 +4,10 @@ import at.fhj.swd.persistence.IRepository;
 import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import java.util.Date;
+import java.util.List;
 
 public class BuchRepository extends Repository<Buch> implements IRepository<Buch> {
 
@@ -30,4 +33,17 @@ public class BuchRepository extends Repository<Buch> implements IRepository<Buch
         Persistence.resetTable(schema, table);
         Persistence.resetSequence(schema, sequence);
     }
+
+    public String findBuchTitelByErscheinungsjahr(Date erscheinungsjahr){
+        TypedQuery<String> query = entityManager.createNamedQuery("Buch.findBuchTitelByErscheinungsjahr", String.class);
+        query.setParameter("Erscheinungsjahr", erscheinungsjahr);
+        return query.getSingleResult();
+    }
+
+    public Integer findBuchIdByGenre(String bezeichnung){
+        TypedQuery<Integer> query = entityManager.createNamedQuery("Buch.findBuchIDByGenre", Integer.class);
+        query.setParameter("GenreName", bezeichnung);
+        return query.getSingleResult();
+    }
+
 }

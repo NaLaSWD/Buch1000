@@ -22,7 +22,8 @@ public class AutorTest {
     static final String ort = "Graz";
     static final int plz = 8010;
     static final String strasseUpdate = "Hausstrasse 20";
-    static List<Autor> autor = new ArrayList<>();
+    static List<Autor> autoren = new ArrayList<>();
+    static Autor autor;
 
     static EinzelbueroRepository einzelbueroRepository;
     static final int eid = 123;
@@ -59,7 +60,7 @@ public class AutorTest {
         Transaction.begin();
         verlag = verlagRepository.create(vid, name, strasse, ort, plz);
         einzelbuero = einzelbueroRepository.create(eid, eort, estrasse, eplz);
-        autorRepository.create(aid, vorname, nachname, geb_datum, verlag, einzelbuero);
+        autor = autorRepository.create(aid, vorname, nachname, geb_datum, verlag, einzelbuero);
         Transaction.commit();
     }
 
@@ -73,20 +74,20 @@ public class AutorTest {
         Transaction.commit();
 
         autor = autorRepository.find(aid);
-        assertEquals(vornameUpdate, (String) autor.getVorname());
+        assertEquals(vornameUpdate, autor.getVorname());
     }
 
 
     @Test
     public void findAutorByVerlag(){
-        String result = autorRepository.findAutorByVerlag(name);
-        assertEquals(name, result);
+        Autor result = autorRepository.findAutorByVerlag(name);
+        assertEquals(autor, result);
     }
 
     @Test
     public void findEinzelbueroByVerlag(){
-        String result = autorRepository.findAutorByVerlag(name);
-        assertEquals(buecher, result);
+        String result = autorRepository.findEinzelbueroByVerlag(name);
+        assertEquals(estrasse, result);
     }
 
     @Test

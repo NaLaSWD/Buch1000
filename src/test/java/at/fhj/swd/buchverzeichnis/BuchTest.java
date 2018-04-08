@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static jdk.nashorn.internal.objects.Global.getDate;
+import static org.junit.Assert.*;
 
 @org.junit.FixMethodOrder( org.junit.runners.MethodSorters.NAME_ASCENDING)
 public class BuchTest {
@@ -25,7 +24,7 @@ public class BuchTest {
     static BuchRepository buchRepository;
     static final int bid = 158;
     static final int isbn = 5656;
-    static Date erscheinungsjahr ;
+    static Date erscheinungsjahr = new Date(20100822);
     static final String titel = "DB_Buch";
     static final int isbnUpdate = 7575;
     static Genre genre;
@@ -74,6 +73,22 @@ public class BuchTest {
             List<Buch> result = genreRepository.findBuecherByGenre(genreDescription);
             assertEquals(buecher, result);
         }
+
+
+        //Buch-Query Tests
+        @Test
+        public void findBuchTitelByErscheinungsjahr(){
+            String result = buchRepository.findBuchTitelByErscheinungsjahr(erscheinungsjahr);
+            assertEquals(titel, result);
+        }
+
+        @Test
+        public void findBuchIdByGenre(){
+            Integer result = buchRepository.findBuchIdByGenre(genreDescription);
+            assertEquals(buecher.get(0).getId(), (int)result);
+        }
+
+
 
         @Test
         public void remove () {
