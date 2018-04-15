@@ -25,8 +25,6 @@ public class AutorBuchTest {
     static final String strasse = "Heimweg 10";
     static final String ort = "Graz";
     static final int plz = 8010;
-    static final String strasseUpdate = "Hausstrasse 20";
-    static List<Autor> autoren = new ArrayList<>();
     static Autor autor;
 
     static EinzelbueroRepository einzelbueroRepository;
@@ -34,23 +32,18 @@ public class AutorBuchTest {
     static final String eort = "Graz";
     static final String estrasse = "Strass 1";
     static final int eplz = 8010;
-    static final int eplzUpdate = 8020 ;
-    static List<Autor> eautor = new ArrayList<>();
 
     static AutorRepository autorRepository;
     static final int aid = 567;
     static final String vorname = "Max";
     static final String nachname = "Mayer";
     static Date geb_datum;
-    static final String vornameUpdate = "Martin";
-    static List<Buch> buecher = new ArrayList<>();
     static Verlag verlag;
     static Einzelbuero einzelbuero;
 
     static GenreRepository genreRepository;
     static int gid = 97;
-    static String genreDescription = "Thriller";
-    static String genreUpdate = "Romane";
+    static String genreBezeichnung = "Thriller";
     static Buch buch;
 
 
@@ -59,25 +52,26 @@ public class AutorBuchTest {
     static final int isbn = 5656;
     static Date erscheinungsjahr ;
     static final String titel = "DB_Buch";
-    static final int isbnUpdate = 7575;
     static Genre genre;
+
+    final int bid2 = 160;
+    final int isbn2 = 8888;
+    final String titel2 = "Java 9";
 
 
     @BeforeClass
     public static void setup() {
-        genreRepository = new GenreRepository();
         verlagRepository = new VerlagRepository();
         einzelbueroRepository = new EinzelbueroRepository();
         autorRepository = new AutorRepository();
+        genreRepository = new GenreRepository();
         buchRepository = new BuchRepository();
         Transaction.begin();
-
         autorRepository.reset();
-        buchRepository.reset();
-        genreRepository.reset();
         verlagRepository.reset();
         einzelbueroRepository.reset();
-
+        buchRepository.reset();
+        genreRepository.reset();
         Transaction.commit();
     }
 
@@ -87,11 +81,9 @@ public class AutorBuchTest {
         verlag = verlagRepository.create(vid, name, strasse, ort, plz);
         einzelbuero = einzelbueroRepository.create(eid, eort, estrasse, eplz);
         autor = autorRepository.create(aid, vorname, nachname, geb_datum, verlag, einzelbuero);
-        genre = genreRepository.create(gid, genreDescription);
+        genre = genreRepository.create(gid, genreBezeichnung);
         buch = buchRepository.create(bid, isbn, erscheinungsjahr, titel, genre);
         Transaction.commit();
-        //buch = null;
-        //autor = null;
         buch = buchRepository.find(bid);
         autor = autorRepository.find(aid);
         Transaction.begin();
@@ -101,12 +93,9 @@ public class AutorBuchTest {
 
     @Test
     public void modify() {
-        final int xid = 160;
-        final int isbn = 8888;
-        final String titel = "Java 9";
 
         Transaction.begin();
-        Buch newbuch = buchRepository.create(xid, isbn, erscheinungsjahr, titel, genre);
+        Buch newbuch = buchRepository.create(bid2, isbn2, erscheinungsjahr, titel2, genre);
         Transaction.commit();
 
         Transaction.begin();
@@ -116,17 +105,63 @@ public class AutorBuchTest {
 
     @Test
     public void remove() {
-        //ToDo
+
+        Einzelbuero einzelbuero = einzelbueroRepository.find(eid);
+        Verlag verlag = verlagRepository.find(vid);
+        Autor autor = autorRepository.find(aid);
+        Buch buch = buchRepository.find(bid);
+        Buch buch2 = buchRepository.find(bid2);
+        Genre genre = genreRepository.find(gid);
+
+        assertNotNull(einzelbuero);
+        assertNotNull(verlag);
+        assertNotNull(autor);
+        assertNotNull(buch);
+        assertNotNull(buch2);
+        assertNotNull(genre);
+
+
+        Transaction.begin ();
+
+        einzelbueroRepository.remove(einzelbuero);
+        verlagRepository.remove(verlag);
+        autorRepository.remove(autor);
+        buchRepository.remove(buch);
+        buchRepository.remove(buch2);
+        genreRepository.remove(genre);
+
+        Transaction.commit();
+        einzelbuero =  einzelbueroRepository.find(eid);
+        verlag = verlagRepository.find(vid);
+        autor = autorRepository.find(aid);
+        buch = buchRepository.find(bid);
+        buch2 = buchRepository.find(bid2);
+        genre = genreRepository.find(gid);
+
+        assertNull (einzelbuero);
+        assertNull (verlag);
+        assertNull (autor);
+        assertNull (buch);
+        assertNull(buch2);
+        assertNull (genre);
+
     }
 
     @AfterClass
     public static void teardown() {
         Transaction.begin();
+        /*einzelbueroRepository.reset();
+        verlagRepository.reset();
+        autorRepository.reset();
+        buchRepository.reset();
+        genreRepository.reset();*/
+
         autorRepository.reset();
         buchRepository.reset();
         genreRepository.reset();
         verlagRepository.reset();
         einzelbueroRepository.reset();
+
         Transaction.commit();
     }
 }
