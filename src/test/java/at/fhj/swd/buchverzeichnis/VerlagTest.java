@@ -23,7 +23,6 @@ public class VerlagTest {
     static final String ort = "Graz";
     static final int plz = 8010;
     static final String strasseUpdate = "Hausstrasse 20";
-    static List<Autor> autor = new ArrayList<>();
 
     @BeforeClass
     public static void setup() {
@@ -53,6 +52,15 @@ public class VerlagTest {
         verlag = verlagRepository.find(id);
         assertEquals(strasseUpdate, (String) verlag.getStrasse());
     }
+
+
+    //Verlag Query Test
+    @Test
+    public void findVerlagOrtByAutorNachname(){
+        String result = verlagRepository.findVerlagOrtByAutorNachname(ort);
+        assertEquals(ort, result);
+    }
+
 
     @Test
     public void remove () {
