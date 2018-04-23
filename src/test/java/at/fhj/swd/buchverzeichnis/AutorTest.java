@@ -60,6 +60,7 @@ public class AutorTest {
 
         assertEquals(einzelbuero, autor.getEinzelbuero());
         assertTrue(einzelbuero.getAutor().equals(autor));
+        assertEquals(verlag, autor.getVerlag());
 
     }
 
@@ -67,11 +68,12 @@ public class AutorTest {
     public void modify () {
         autor = autorRepository.find(aid);
         assertNotNull (autor);
-        Transaction.begin();
 
+        Transaction.begin();
         autor.setVorname(vornameUpdate);
         Transaction.commit();
 
+        autor = null;
         autor = autorRepository.find(aid);
         assertEquals(vornameUpdate, autor.getVorname());
     }
@@ -79,24 +81,38 @@ public class AutorTest {
 
     @Test
     public void findAutorByVerlag(){
-        Autor result = autorRepository.findAutorByVerlag(name);
-        assertEquals(autor, result);
+        List<Autor> result = autorRepository.findAutorByVerlag(name);
+        assertEquals(1, result.size());
     }
 
     @Test
     public void findEinzelbueroByVerlag(){
-        String result = autorRepository.findEinzelbueroByVerlag(name);
+        String result = autorRepository.findEinzelbueroByVerlag(nachname);
+        assertEquals(name, result);
+    }
+
+    @Test
+    public void findEinzelbueroByAutor(){
+        String result = autorRepository.findEinzelbueroByAutor(nachname);
         assertEquals(estrasse, result);
     }
+
+    @Test
+    public void findBuecherByAutor(){
+        List<Buch> result = autorRepository.findBuecherByAutor(nachname);
+        assertEquals(1, result.size());
+    }
+
 
     @Test
     public void remove() {
         Autor autor = autorRepository.find(aid);
         assertNotNull (autor);
-        Transaction.begin ();
 
+        Transaction.begin ();
         autorRepository.remove(autor);
         Transaction.commit();
+
         autor = autorRepository.find(aid);
         assertNull (autor);
     }

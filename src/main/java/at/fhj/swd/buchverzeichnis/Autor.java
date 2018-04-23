@@ -13,11 +13,20 @@ import java.util.Date;
                         "FROM Autor a " +
                         "WHERE a.verlag.name  = :Verlag"),
 
-    @NamedQuery(name  = "Autor.findEinzelbueroByVerlag",
+    @NamedQuery(name  = "Autor.findVerlagByAutor",
+                query = "SELECT a.verlag.name " +
+                        "FROM Autor a " +
+                        "WHERE a.nachname = :Nachname"),
+
+    @NamedQuery(name  = "Autor.findEinzelbueroByAutor",
                 query = "SELECT a.einzelbuero.strasse " +
                         "FROM Autor a " +
-                        "WHERE a.verlag.name = :Verlag"),
+                        "WHERE a.nachname = :Nachname"),
 
+    @NamedQuery(name  = "Autor.findBuecherByAutor",
+                query = "SELECT a.buecher " +
+                        "FROM Autor a " +
+                        "WHERE a.nachname = :Nachname")
 })
 
 public class Autor {
@@ -80,10 +89,11 @@ public class Autor {
     }
 
     //Buch
-    void addBuch(Buch buch) {
+    public void addBuch(Buch buch) {
         if (!buecher.contains(buch)) {
             buecher.add(buch);
         }
+        buch.addAutor(this);
     }
 
     public Collection<Buch> getBuch() {

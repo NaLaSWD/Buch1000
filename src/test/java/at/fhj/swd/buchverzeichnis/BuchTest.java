@@ -96,22 +96,6 @@ public class BuchTest {
         assertTrue(buecher.containsAll(result));
     }
 
-    /*@Test
-    public void findBuchTitelByErscheinungsjahr(){
-        String result = buchRepository.findBuchTitelByErscheinungsjahr(erscheinungsjahr);
-        assertEquals(titel, result);
-    }
-
-    @Test
-    public void findBuchIdByGenre(){
-        List<Buch> result = buchRepository.findBuchIdByGenre(genreBezeichnung);
-
-        for (Object i: result) {
-            int test = buecher.iterator().next().getIsbn();
-            assertEquals(buecher.iterator().next().getIsbn(), (int)i);
-        }
-    }*/
-
     @Test
     public void remove () {
         buch = buchRepository.find(bid);
@@ -119,11 +103,12 @@ public class BuchTest {
 
         buch2 = buchRepository.find(bid2);
         assertNotNull(buch2);
-        Transaction.begin ();
 
+        Transaction.begin ();
         buchRepository.remove( buch );
         buchRepository.remove(buch2);
         Transaction.commit();
+
         buch = buchRepository.find(bid);
         buch2 = buchRepository.find(bid2);
         assertNull (buch);

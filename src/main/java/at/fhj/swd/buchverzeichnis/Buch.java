@@ -1,7 +1,5 @@
 package at.fhj.swd.buchverzeichnis;
 
-import com.sun.tools.javah.Gen;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -83,11 +81,10 @@ public class Buch {
         return autoren;
     }
 
-    public void addAutor(Autor autor) {
+    void addAutor(Autor autor) {
         if (!autoren.contains(autor)) {
             autoren.add(autor);
         }
-        autor.addBuch(this);
     }
 
     public Genre getGenre() {

@@ -33,17 +33,27 @@ public class AutorRepository extends Repository<Autor> implements IRepository<Au
         Persistence.resetSequence(schema, sequence);
     }
 
-    public Autor findAutorByVerlag(String name){
+    public List<Autor> findAutorByVerlag(String verlagname){
         TypedQuery<Autor> query = entityManager.createNamedQuery("Autor.findAutorByVerlag", Autor.class);
-        query.setParameter("Verlag", name);
+        query.setParameter("Verlag", verlagname);
+        return query.getResultList();
+    }
+
+    public String findEinzelbueroByVerlag(String nachname){
+        TypedQuery<String> query = entityManager.createNamedQuery("Autor.findVerlagByAutor", String.class);
+        query.setParameter("Nachname", nachname);
         return query.getSingleResult();
     }
 
-    public String findEinzelbueroByVerlag(String name){
-        TypedQuery<String> query = entityManager.createNamedQuery("Autor.findEinzelbueroByVerlag", String.class);
-        query.setParameter("Verlag", name);
+    public String findEinzelbueroByAutor(String nachname){
+        TypedQuery<String> query = entityManager.createNamedQuery("Autor.findEinzelbueroByAutor", String.class);
+        query.setParameter("Nachname", nachname);
         return query.getSingleResult();
     }
 
-
+    public List<Buch> findBuecherByAutor(String nachname){
+        TypedQuery<Buch> query = entityManager.createNamedQuery("Autor.findBuecherByAutor", Buch.class);
+        query.setParameter("Nachname", nachname);
+        return query.getResultList();
+    }
 }

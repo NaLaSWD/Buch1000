@@ -17,6 +17,7 @@ import static org.junit.Assert.assertNull;
 public class EinzelbueroTest {
 
     static EinzelbueroRepository einzelbueroRepository;
+    static Einzelbuero einzelbuero;
     static final int id = 123;
     static final String ort = "Graz";
     static final String strasse = "Strass 1";
@@ -34,37 +35,34 @@ public class EinzelbueroTest {
     @Test
     public void create () {
         Transaction.begin();
-        einzelbueroRepository.create(id, ort, strasse, plz);
+        einzelbuero =  einzelbueroRepository.create(id, ort, strasse, plz);
         Transaction.commit();
+        assertEquals(strasse, einzelbuero.getStrasse());
     }
 
     @Test
     public void modify () {
-        Einzelbuero einzelbuero = einzelbueroRepository.find(id);
+        einzelbuero = einzelbueroRepository.find(id);
         assertNotNull (einzelbuero);
-        Transaction.begin ();
 
+        Transaction.begin ();
         einzelbuero.setPlz(plzUpdate);
         Transaction.commit();
 
+        einzelbuero = null;
         einzelbuero = einzelbueroRepository.find(id);
-        assertEquals(plzUpdate, (int) einzelbuero.getPlz());
+        assertEquals(plzUpdate, einzelbuero.getPlz());
     }
-
-    /*//Einelbuero Test
-    public Einzelbuero findEinzelbueroOrtByAutorID(String name){
-        TypedQuery<Einzelbuero> query = entityManager.createNamedQuery("Einzelbuero.findEinzelbueroOrtByAutorID", Einzelbuero.class);
-        query.setParameter("Einzelbuero", name);
-        return query.getSingleResult();
-    }*/
 
     @Test
     public void remove () {
         Einzelbuero einzelbuero = einzelbueroRepository.find(id);
         assertNotNull (einzelbuero);
+
         Transaction.begin ();
         einzelbueroRepository.remove( einzelbuero );
         Transaction.commit();
+
         einzelbuero = einzelbueroRepository.find(id);
         assertNull (einzelbuero);
     }

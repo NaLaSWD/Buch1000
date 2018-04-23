@@ -84,10 +84,12 @@ public class AutorBuchTest {
         genre = genreRepository.create(gid, genreBezeichnung);
         buch = buchRepository.create(bid, isbn, erscheinungsjahr, titel, genre);
         Transaction.commit();
+
         buch = buchRepository.find(bid);
         autor = autorRepository.find(aid);
+
         Transaction.begin();
-        buch.addAutor(autor);
+        autor.addBuch(buch);
         Transaction.commit();
     }
 
@@ -101,6 +103,8 @@ public class AutorBuchTest {
         Transaction.begin();
         autor.addBuch(newbuch);
         Transaction.commit();
+
+        assertEquals(2, autor.getBuch().size());
     }
 
     @Test

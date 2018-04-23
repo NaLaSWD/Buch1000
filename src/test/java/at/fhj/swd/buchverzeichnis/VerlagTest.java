@@ -17,6 +17,7 @@ import static org.junit.Assert.assertNull;
 public class VerlagTest {
 
     static VerlagRepository verlagRepository;
+    static Verlag verlag;
     static final int id = 158;
     static final String name = "VerlAut";
     static final String strasse = "Heimweg 10";
@@ -32,25 +33,26 @@ public class VerlagTest {
         Transaction.commit();
     }
 
-
     @Test
     public void create () {
         Transaction.begin();
-        verlagRepository.create(id, name, ort, strasse, plz);
+        verlag = verlagRepository.create(id, name, ort, strasse, plz);
         Transaction.commit();
+        assertEquals(strasse, verlag.getStrasse());
     }
 
     @Test
     public void modify () {
-        Verlag verlag = verlagRepository.find(id);
+        verlag = verlagRepository.find(id);
         assertNotNull (verlag);
-        Transaction.begin ();
 
+        Transaction.begin ();
         verlag.setStrasse(strasseUpdate);
         Transaction.commit();
 
+        verlag = null;
         verlag = verlagRepository.find(id);
-        assertEquals(strasseUpdate, (String) verlag.getStrasse());
+        assertEquals(strasseUpdate, verlag.getStrasse());
     }
 
 
@@ -58,10 +60,11 @@ public class VerlagTest {
     public void remove () {
         Verlag verlag = verlagRepository.find(id);
         assertNotNull (verlag);
-        Transaction.begin ();
 
+        Transaction.begin ();
         verlagRepository.remove( verlag );
         Transaction.commit();
+
         verlag = verlagRepository.find(id);
         assertNull (verlag);
     }

@@ -16,6 +16,7 @@ import static org.junit.Assert.assertNull;
 public class GenreTest {
 
     static GenreRepository genreRepository;
+    static Genre thriller;
     static int id = 97;
     static String bezeichnung = "Thriller";
     static String bezeichnungUpdate = "Romane";
@@ -31,38 +32,34 @@ public class GenreTest {
     @Test
     public void create(){
         Transaction.begin();
-        genreRepository.create(id, bezeichnung);
+        Genre newGenre = genreRepository.create(id, bezeichnung);
         Transaction.commit();
+        assertEquals(id, newGenre.getId());
     }
 
     @Test
     public void modify(){
-        Genre thriller = genreRepository.find(id);
+        thriller = genreRepository.find(id);
         assertNotNull (thriller);
-        Transaction.begin();
 
+        Transaction.begin();
         thriller.setBezeichnung(bezeichnungUpdate);
         Transaction.commit();
 
+        thriller = null;
         thriller = genreRepository.find(id);
-        assertEquals(bezeichnungUpdate, (String) thriller.getBezeichnung());
+        assertEquals(bezeichnungUpdate, thriller.getBezeichnung());
     }
-
-    /*//GenreTest
-    @Test
-    public void findVerlagOrtByAutorNachname(){
-        Autor result = verlagRepository.findVerlagOrtByAutorNachname(ort);
-        assertEquals(ort, result);
-    }*/
 
     @Test
     public void remove () {
-        Genre thriller = genreRepository.find(id);
+        thriller = genreRepository.find(id);
         assertNotNull (thriller);
-        Transaction.begin ();
 
+        Transaction.begin ();
         genreRepository.remove( thriller );
         Transaction.commit();
+
         thriller = genreRepository.find(id);
         assertNull (thriller);
     }
