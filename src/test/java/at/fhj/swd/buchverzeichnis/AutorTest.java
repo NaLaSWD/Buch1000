@@ -21,8 +21,6 @@ public class AutorTest {
     static final String strasse = "Heimweg 10";
     static final String ort = "Graz";
     static final int plz = 8010;
-    static final String strasseUpdate = "Hausstrasse 20";
-    static List<Autor> autoren = new ArrayList<>();
     static Autor autor;
 
     static EinzelbueroRepository einzelbueroRepository;
@@ -30,8 +28,6 @@ public class AutorTest {
     static final String eort = "Graz";
     static final String estrasse = "Strass 1";
     static final int eplz = 8010;
-    static final int eplzUpdate = 8020 ;
-    static List<Autor> eautor = new ArrayList<>();
 
     static AutorRepository autorRepository;
     static final int aid = 567;
@@ -39,7 +35,6 @@ public class AutorTest {
     static final String nachname = "Mayer";
     static Date geb_datum;
     static final String vornameUpdate = "Martin";
-    static List<Buch> buecher = new ArrayList<>();
     static Verlag verlag;
     static Einzelbuero einzelbuero;
 
@@ -62,11 +57,15 @@ public class AutorTest {
         einzelbuero = einzelbueroRepository.create(eid, eort, estrasse, eplz);
         autor = autorRepository.create(aid, vorname, nachname, geb_datum, verlag, einzelbuero);
         Transaction.commit();
+
+        assertEquals(einzelbuero, autor.getEinzelbuero());
+        assertTrue(einzelbuero.getAutor().equals(autor));
+
     }
 
     @Test
     public void modify () {
-        Autor autor = autorRepository.find(aid);
+        autor = autorRepository.find(aid);
         assertNotNull (autor);
         Transaction.begin();
 

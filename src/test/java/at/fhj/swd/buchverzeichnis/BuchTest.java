@@ -14,21 +14,27 @@ import static org.junit.Assert.*;
 @org.junit.FixMethodOrder( org.junit.runners.MethodSorters.NAME_ASCENDING)
 public class BuchTest {
 
-    static GenreRepository genreRepository;static int gid = 97;
-    //static String genreDescription = "Thriller";
-    static String genreBezeichnung = "Thriller";
+    static BuchRepository buchRepository;
+    static GenreRepository genreRepository;
     static List<Buch> buecher = new ArrayList<>();
 
+    static Genre genre;
+    static int gid = 97;
+    static String genreBezeichnung = "Lehrbuch";
 
-    static BuchRepository buchRepository;
     static Buch buch;
     static final int bid = 158;
     static final int isbn = 5656;
     static Date erscheinungsjahr = new Date(20100822);
     static final String titel = "DB_Buch";
     static final int isbnUpdate = 7575;
-    static Genre genre;
-    static List<Autor> autor = new ArrayList<>();
+
+    static Buch buch2;
+    static final int bid2 = 987;
+    static final int isbn2 = 3434;
+    static Date erscheinungsjahr2 = new Date(20120404);
+    static final String titel2 = "SQL beginner";
+    static final String titel2Update = "SQL advanced";
 
     @BeforeClass
     public static void setup() {
@@ -46,40 +52,51 @@ public class BuchTest {
         Transaction.begin();
         genre = genreRepository.create(gid, genreBezeichnung);
         buch = buchRepository.create(bid, isbn, erscheinungsjahr, titel, genre);
+        buch2 = buchRepository.create(bid2, isbn2, erscheinungsjahr2, titel2, genre);
         buecher.add(buch);
+        buecher.add(buch2);
         Transaction.commit();
         assertEquals(genre, buch.getGenre());
         assertTrue(genre.getBuecher().equals(buecher));
+        assertEquals(2, buecher.size());
     }
 
     @Test
     public void modify () {
         buch = buchRepository.find(bid);
         assertNotNull(buch);
-        Transaction.begin ();
+        buch2 = buchRepository.find(bid2);
+        assertNotNull(buch2);
 
+        Transaction.begin ();
         buch.setIsbn(isbnUpdate);
+        buch2.setTitel(titel2Update);
         Transaction.commit();
 
+        buch = null;
         buch = buchRepository.find(bid);
-        assertEquals(isbnUpdate, (int) buch.getIsbn());
+        assertEquals(isbnUpdate, buch.getIsbn());
+
+        buch2 = null;
+        buch2 = buchRepository.find(bid2);
+        assertEquals(titel2Update, buch2.getTitel());
     }
 
     @Test
     public void findGenreBezeichnungByBuchTitel(){
         String result = genreRepository.findGenreBezeichnung(titel);
+        String result2 = genreRepository.findGenreBezeichnung(titel2);
         assertEquals(genreBezeichnung, result);
+        assertEquals(genreBezeichnung, result2);
     }
 
     @Test
     public void findBuecherByGenre(){
         List<Buch> result = genreRepository.findBuecherByGenre(genreBezeichnung);
-        assertEquals(buecher, result);
+        assertTrue(buecher.containsAll(result));
     }
 
-
-    //Buch-Query Tests
-    @Test
+    /*@Test
     public void findBuchTitelByErscheinungsjahr(){
         String result = buchRepository.findBuchTitelByErscheinungsjahr(erscheinungsjahr);
         assertEquals(titel, result);
@@ -87,22 +104,30 @@ public class BuchTest {
 
     @Test
     public void findBuchIdByGenre(){
-        Integer result = buchRepository.findBuchIdByGenre(genreBezeichnung);
-        assertEquals(buecher.get(0).getId(), (int)result);
-    }
+        List<Buch> result = buchRepository.findBuchIdByGenre(genreBezeichnung);
 
-
+        for (Object i: result) {
+            int test = buecher.iterator().next().getIsbn();
+            assertEquals(buecher.iterator().next().getIsbn(), (int)i);
+        }
+    }*/
 
     @Test
     public void remove () {
         buch = buchRepository.find(bid);
         assertNotNull (buch);
+
+        buch2 = buchRepository.find(bid2);
+        assertNotNull(buch2);
         Transaction.begin ();
 
         buchRepository.remove( buch );
+        buchRepository.remove(buch2);
         Transaction.commit();
         buch = buchRepository.find(bid);
+        buch2 = buchRepository.find(bid2);
         assertNull (buch);
+        assertNull (buch2);
     }
 
     @AfterClass

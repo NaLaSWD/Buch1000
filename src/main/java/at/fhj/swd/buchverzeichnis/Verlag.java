@@ -1,12 +1,19 @@
 package at.fhj.swd.buchverzeichnis;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+//neuer query Verlag
+@NamedQueries({
+        @NamedQuery( name = "Verlag.findVerlagOrtByAutorNachname",
+                    query = "SELECT a.nachname, v.ort " +
+                            "FROM Autor a LEFT JOIN Verlag v " +
+                            "ON a.verlag.id = v.id " +
+                            "WHERE v.ort = :Ort"),
+})
+
 public class Verlag {
     @Id
     private int id;
@@ -69,15 +76,14 @@ public class Verlag {
         this.plz = plz;
     }
 
-    void addAutor(Autor autor){
-        if(!autoren.contains(autor)){
-            autoren.add(autor);
-        }
-    }
 
     public Collection<Autor> getAutor() {
         return autoren;
     }
 
-
+    void addAutor(Autor autor) {
+        if (!autoren.contains(autor)) {
+            autoren.add(autor);
+        }
+    }
 }

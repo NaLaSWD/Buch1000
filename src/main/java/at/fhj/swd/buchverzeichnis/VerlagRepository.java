@@ -4,6 +4,9 @@ import at.fhj.swd.persistence.IRepository;
 import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
+import javax.persistence.TypedQuery;
+import java.util.List;
+
 public class VerlagRepository extends Repository<Verlag> implements IRepository<Verlag> {
 
     private final static String schema = "public";
@@ -29,5 +32,11 @@ public class VerlagRepository extends Repository<Verlag> implements IRepository<
         Persistence.resetSequence(schema, sequence);
     }
 
+    //Verlag Query
+    public Autor findVerlagOrtByAutorNachname(String ort){
+        TypedQuery<Autor> query = entityManager.createNamedQuery("Verlag.findVerlagOrtByAutorNachname", Autor.class);
+        query.setParameter("Ort", ort);
+        return query.getSingleResult();
+    }
 }
 

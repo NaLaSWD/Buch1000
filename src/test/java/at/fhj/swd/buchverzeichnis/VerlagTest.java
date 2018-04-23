@@ -54,14 +54,6 @@ public class VerlagTest {
     }
 
 
-    //Verlag Query Test
-    @Test
-    public void findVerlagOrtByAutorNachname(){
-        String result = verlagRepository.findVerlagOrtByAutorNachname(ort);
-        assertEquals(ort, result);
-    }
-
-
     @Test
     public void remove () {
         Verlag verlag = verlagRepository.find(id);

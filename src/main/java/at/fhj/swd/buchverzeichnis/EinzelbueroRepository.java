@@ -4,6 +4,8 @@ import at.fhj.swd.persistence.IRepository;
 import at.fhj.swd.persistence.Persistence;
 import at.fhj.swd.persistence.Repository;
 
+import javax.persistence.TypedQuery;
+
 
 public class EinzelbueroRepository extends Repository<Einzelbuero> implements IRepository<Einzelbuero> {
 
@@ -27,5 +29,12 @@ public class EinzelbueroRepository extends Repository<Einzelbuero> implements IR
     public void reset() {
         Persistence.resetTable(schema, table);
         Persistence.resetSequence(schema, sequence);
+    }
+
+    //Einzelbuero Query
+    public String findEinzelbueroOrtByAutorID(String ort){
+        TypedQuery<String> query = entityManager.createNamedQuery("Einzelbuero.findEinzelbueroOrtByAutorID", String.class);
+        query.setParameter("Ort", ort);
+        return query.getSingleResult();
     }
 }

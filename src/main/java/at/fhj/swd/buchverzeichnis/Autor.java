@@ -16,7 +16,8 @@ import java.util.Date;
     @NamedQuery(name  = "Autor.findEinzelbueroByVerlag",
                 query = "SELECT a.einzelbuero.strasse " +
                         "FROM Autor a " +
-                        "WHERE a.verlag.name = :Verlag")
+                        "WHERE a.verlag.name = :Verlag"),
+
 })
 
 public class Autor {
@@ -78,7 +79,7 @@ public class Autor {
         this.geb_datum = geb_datum;
     }
 
-
+    //Buch
     void addBuch(Buch buch) {
         if (!buecher.contains(buch)) {
             buecher.add(buch);
@@ -89,6 +90,7 @@ public class Autor {
         return buecher;
     }
 
+    //Verlag
     public Verlag getVerlag() {
         return verlag;
     }
@@ -98,11 +100,12 @@ public class Autor {
         verlag.addAutor(this);
     }
 
+    //Einzelbuero
     public Einzelbuero getEinzelbuero() {
         return einzelbuero;
     }
 
-    void setEinzelbuero(Einzelbuero einzelbuero){
+    public void setEinzelbuero(Einzelbuero einzelbuero){
         this.einzelbuero = einzelbuero;
         einzelbuero.setAutor(this);
     }

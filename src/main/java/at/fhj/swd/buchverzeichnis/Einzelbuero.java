@@ -1,11 +1,18 @@
 package at.fhj.swd.buchverzeichnis;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Einzelbuero.findEinzelbueroOrtByAutorID",
+                query = "SELECT a.id, e.ort " +
+                        "FROM Autor a LEFT JOIN Einzelbuero e " +
+                        "ON a.einzelbuero.id = e.id " +
+                        "WHERE e.ort = :Ort"),
+
+})
+
 public class Einzelbuero {
     @Id
     private int id;
@@ -62,11 +69,9 @@ public class Einzelbuero {
         return autor;
     }
 
-    public void setAutor(Autor autor) {
+    void setAutor(Autor autor) {
         if(this.autor == null){
             this.autor = autor;
-            autor.setEinzelbuero(this);
         }
     }
-
 }

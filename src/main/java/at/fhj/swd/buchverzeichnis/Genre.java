@@ -6,16 +6,17 @@ import java.util.Collection;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name  = "Genre.findGenreBezeichnungByBuchTitel",
+        @NamedQuery(name  = "Genre.findGenreBezeichnungByBuchTitel",
                 query = "SELECT g.bezeichnung " +
                         "FROM Genre g INNER JOIN Buch b " +
                         "ON g.id = b.genre.id " +
                         "WHERE b.titel = :Buchtitel"),
 
-    @NamedQuery(name  = "Genre.findBuchTitelByGenre",
+        @NamedQuery(name  = "Genre.findBuchTitelByGenre",
                 query = "SELECT g.buecher "+
-                        "FROM Genre g INNER JOIN Buch b " +
-                        "ON g.id = b.genre.id "+
+                        "FROM Genre g " +
+                        //"INNER JOIN Buch b " +
+                        //"ON g.id = b.genre.id "+
                         "WHERE g.bezeichnung = :Genre")
 })
 
@@ -29,9 +30,9 @@ public class Genre {
     protected Genre(){
     }
 
-    public Genre(int id, String genre) {
+    public Genre(int id, String bezeichnung) {
         setId(id);
-        setBezeichnung(genre);
+        setBezeichnung(bezeichnung);
         buecher = new ArrayList<>();
     }
 

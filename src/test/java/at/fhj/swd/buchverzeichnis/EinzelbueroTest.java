@@ -5,6 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class EinzelbueroTest {
     static final String strasse = "Strass 1";
     static final int plz = 8010;
     static final int plzUpdate = 8020 ;
-    static List<Autor> autor = new ArrayList<>();
 
     @BeforeClass
     public static void setup() {
@@ -51,6 +51,13 @@ public class EinzelbueroTest {
         assertEquals(plzUpdate, (int) einzelbuero.getPlz());
     }
 
+    /*//Einelbuero Test
+    public Einzelbuero findEinzelbueroOrtByAutorID(String name){
+        TypedQuery<Einzelbuero> query = entityManager.createNamedQuery("Einzelbuero.findEinzelbueroOrtByAutorID", Einzelbuero.class);
+        query.setParameter("Einzelbuero", name);
+        return query.getSingleResult();
+    }*/
+
     @Test
     public void remove () {
         Einzelbuero einzelbuero = einzelbueroRepository.find(id);
@@ -70,5 +77,4 @@ public class EinzelbueroTest {
     }
 
 }
-
 

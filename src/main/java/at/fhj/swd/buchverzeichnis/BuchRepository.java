@@ -34,16 +34,16 @@ public class BuchRepository extends Repository<Buch> implements IRepository<Buch
         Persistence.resetSequence(schema, sequence);
     }
 
-    public String findBuchTitelByErscheinungsjahr(Date erscheinungsjahr){
+    /*public String findBuchTitelByErscheinungsjahr(Date erscheinungsjahr){
         TypedQuery<String> query = entityManager.createNamedQuery("Buch.findBuchTitelByErscheinungsjahr", String.class);
         query.setParameter("Erscheinungsjahr", erscheinungsjahr);
         return query.getSingleResult();
-    }
+    }*/
 
-    public Integer findBuchIdByGenre(String bezeichnung){
-        TypedQuery<Integer> query = entityManager.createNamedQuery("Buch.findBuchIDByGenre", Integer.class);
+    public List<Buch> findBuchIdByGenre(String bezeichnung){
+        TypedQuery<Buch> query = entityManager.createNamedQuery("Buch.findBuchIdByGenre", Buch.class);
         query.setParameter("GenreName", bezeichnung);
-        return query.getSingleResult();
+        return query.getResultList();
     }
 
 }

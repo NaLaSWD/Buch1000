@@ -1,5 +1,7 @@
 package at.fhj.swd.buchverzeichnis;
 
+import com.sun.tools.javah.Gen;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,24 +11,17 @@ import java.util.Date;
 @Entity
 
 @NamedQueries({
-    /*@NamedQuery(name  = "Buch.findBuchIDTitelbyAutorFirstName",
-                query = "SELECT b.id, b.titel " +
-                        "FROM Buch b INNER JOIN Autor a " +
-                        "ON ab.buecher.id = b.id INNER JOIN Autor a " +
-                        "ON ab.autoren.id = a.id " +
-                        "WHERE a.vorname  = :AutorFirstname"),*/
-
     @NamedQuery(name  = "Buch.findBuchTitelByErscheinungsjahr",
                 query = "SELECT b.titel " +
                         "FROM Buch b " +
                         "WHERE b.erscheinungsjahr = :Erscheinungsjahr"),
 
-    @NamedQuery(name  = "Buch.findBuchIDByGenre",
-                query = "SELECT b.id " +
+    @NamedQuery(name  = "Buch.findBuchIdByGenre",
+                query = "SELECT b " +
                         "FROM Buch b INNER JOIN Genre g " +
                         "ON b.genre.id = g.id " +
-                        "WHERE g.bezeichnung = :GenreName"),
-})
+                        "WHERE g.bezeichnung = :GenreName "),
+    })
 
 public class Buch {
     @Id
@@ -101,6 +96,6 @@ public class Buch {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+        genre.addBuch(this);
     }
-
 }

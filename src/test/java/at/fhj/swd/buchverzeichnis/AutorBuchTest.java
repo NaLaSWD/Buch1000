@@ -150,11 +150,6 @@ public class AutorBuchTest {
     @AfterClass
     public static void teardown() {
         Transaction.begin();
-        /*einzelbueroRepository.reset();
-        verlagRepository.reset();
-        autorRepository.reset();
-        buchRepository.reset();
-        genreRepository.reset();*/
 
         autorRepository.reset();
         buchRepository.reset();
